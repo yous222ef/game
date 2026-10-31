@@ -1,7 +1,66 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#111b18"><title>Picture Duel · Liar or Not?</title><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head>
-<body><div class="app"><header><a class="brand" href="./">◈ <span>PICTURE DUEL</span></a><div class="header-tools"><button id="sound" class="sound-toggle" aria-pressed="true">Sound on</button><button id="fullscreen" class="icon" aria-label="Toggle fullscreen">⛶</button></div></header>
-<section class="scoreboard" aria-label="Scoreboard"><div><span class="role">PLAYER 1</span><div class="player"><span id="name1">Player 1</span><b id="score1">0</b></div></div><div class="match"><span id="round">READY TO PLAY</span><div id="dots" aria-hidden="true"></div></div><div><span class="role">PLAYER 2</span><div class="player"><span id="name2">Player 2</span><b id="score2">0</b></div></div></section>
-<main><div class="stage-heading"><span id="phase">A GAME OF WORDS & INSTINCT</span><span id="timer" role="timer" aria-label="Time remaining">10 rounds</span></div><section id="stage" class="stage" aria-live="polite"></section><div class="caption"><span id="hint">One screen. Two players. Trust your instincts.</span><span id="deck-count"></span></div></main>
-<footer><div id="actions" class="actions"></div><div class="bottom"><span>DESCRIBE. QUESTION. BLUFF.</span><button id="settings">Game & deck settings</button></div></footer></div>
-<dialog id="settings-dialog"><form method="dialog"><div class="dialog-heading"><h2>Make it your game.</h2><button aria-label="Close settings" class="icon">×</button></div><label>Player 1 name<input id="input1" maxlength="24" value="Player 1"></label><label>Player 2 name<input id="input2" maxlength="24" value="Player 2"></label><p>Player names are intentionally not saved. Every refresh starts again with Player 1 and Player 2, and the start screen lets you enter fresh names.</p><p>The current describer sees the photo, privately chooses whether to tell the truth or lie, describes for up to 60 seconds, then keeps the same photo visible during a 90-second question phase. The question phase ends when time expires or the describer taps <strong>No more questions</strong>.</p><p>Then the photo disappears completely and the phone goes to the other player. The screen shows only two large choices: <strong>LIAR</strong> and <strong>NOT A LIAR</strong>. The app scores the choice against the describer’s private truth/lie selection. The guesser already has the phone, so they become the describer for the next round.</p><label class="upload">Import image list (.txt)<input id="import" type="file" accept="text/plain,.txt"></label><button type="button" id="restore" class="secondary">Use built-in image list</button><button type="button" id="clear" class="secondary">Clear shown-picture history</button><button type="button" id="restart" class="secondary">End match & start again</button><p id="settings-status" role="status"></p><button class="primary">Done</button></form></dialog><dialog id="message-dialog" aria-labelledby="message-title" aria-describedby="message-body"><form method="dialog"><div class="message-symbol" aria-hidden="true">ⓘ</div><h2 id="message-title"></h2><p id="message-body"></p><button class="primary" autofocus>Got it</button></form></dialog></body></html>
+<html lang="en" dir="ltr">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="theme-color" content="#111b18">
+ <title>Picture Duel · Liar or Truthful?</title>
+ <link rel="stylesheet" href="style.css">
+ <script type="module" src="app.js"></script>
+</head>
+<body>
+<div class="app">
+ <header>
+  <a class="brand" href="./">◈ <span id="brand-label">PICTURE DUEL</span></a>
+  <div class="header-tools">
+   <button id="lang-toggle" class="lang-toggle" type="button">العربية</button>
+   <button id="sound" class="sound-toggle" aria-pressed="true">Sound on</button>
+   <button id="fullscreen" class="icon" aria-label="Toggle fullscreen">⛶</button>
+  </div>
+ </header>
+
+ <section class="scoreboard" id="scoreboard" aria-label="Scoreboard">
+  <div><span class="role" id="role1">PLAYER 1</span><div class="player"><span id="name1">Player 1</span><b id="score1">0</b></div></div>
+  <div class="match"><span id="round">FIRST TO 5</span><div id="dots" aria-hidden="true"></div></div>
+  <div><span class="role" id="role2">PLAYER 2</span><div class="player"><span id="name2">Player 2</span><b id="score2">0</b></div></div>
+ </section>
+
+ <main>
+  <div class="stage-heading"><span id="phase"></span><span id="timer" role="timer" aria-label="Time remaining"></span></div>
+  <section id="stage" class="stage" aria-live="polite"></section>
+  <div class="caption"><span id="hint"></span><span id="deck-count"></span></div>
+ </main>
+
+ <footer>
+  <div id="actions" class="actions"></div>
+  <div class="bottom"><span id="bottom-tag">DESCRIBE. QUESTION. BLUFF.</span><button id="settings" type="button">Game & deck settings</button></div>
+ </footer>
+</div>
+
+<dialog id="settings-dialog">
+ <form method="dialog">
+  <div class="dialog-heading"><h2 id="settings-title">Game settings</h2><button aria-label="Close settings" class="icon">×</button></div>
+  <label><span id="settings-name1-label">Player 1 name</span><input id="input1" maxlength="24" value="Player 1" autocomplete="off"></label>
+  <label><span id="settings-name2-label">Player 2 name</span><input id="input2" maxlength="24" value="Player 2" autocomplete="off"></label>
+  <p id="settings-names-note"></p>
+  <p id="settings-flow-note"></p>
+  <p id="settings-scoring-note"></p>
+  <label class="upload"><span id="import-label">Import image list (.txt)</span><input id="import" type="file" accept="text/plain,.txt"></label>
+  <button type="button" id="restore" class="secondary">Use built-in image list</button>
+  <button type="button" id="clear" class="secondary">Clear shown-picture history</button>
+  <button type="button" id="restart" class="secondary">End match & start again</button>
+  <p id="settings-status" role="status"></p>
+  <button id="settings-done" class="primary">Done</button>
+ </form>
+</dialog>
+
+<dialog id="message-dialog" aria-labelledby="message-title" aria-describedby="message-body">
+ <form method="dialog">
+  <div class="message-symbol" aria-hidden="true">ⓘ</div>
+  <h2 id="message-title"></h2>
+  <p id="message-body"></p>
+  <button id="message-ok" class="primary" autofocus>Got it</button>
+ </form>
+</dialog>
+</body>
+</html>

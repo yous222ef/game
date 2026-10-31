@@ -36,3 +36,25 @@ body.verdict-mode .actions button:nth-child(2){background:#2b3930;color:var(--in
 @media(max-height:550px){
  .name-entry{grid-template-columns:1fr 1fr;gap:8px;margin:6px auto}.name-entry label{font-size:9px}.name-entry input{font-size:13px;padding:6px 8px;margin-top:3px}
 }
+
+/* Language switch + Arabic RTL support. */
+.lang-toggle{background:var(--lime);color:#142017;border:1px solid var(--lime);border-radius:20px;padding:9px 13px;font-size:12px;font-weight:800;min-height:36px;white-space:nowrap}
+body.rtl{font-family:Tahoma,Arial,system-ui,sans-serif}
+body.rtl .brand{direction:rtl}
+body.rtl .copy,body.rtl .caption,body.rtl dialog{text-align:right}
+body.rtl .copy p{margin-left:auto;margin-right:auto}
+body.rtl .name-entry{text-align:right}
+body.rtl .player{direction:rtl}
+body.rtl .match{text-align:center}
+body.rtl .actions button{letter-spacing:0}
+body.rtl .bottom{direction:rtl}
+body.rtl #timer{direction:ltr}
+body.rtl .result{direction:rtl}
+body.rtl .result-image{direction:ltr}
+
+/* Result reveal: show the real photo clearly before the next turn. */
+.result .result-image{border-radius:14px;object-fit:contain;background:#101815;padding:4px}
+
+@media(max-width:600px){
+ .header-tools{gap:5px}.lang-toggle,.sound-toggle{font-size:10px;padding:7px 9px;min-height:32px}.icon{padding:2px 7px}
+}

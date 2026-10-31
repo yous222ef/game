@@ -6,6 +6,23 @@ export function parseImageList(text){
  return {pictures:paths.map(image=>({id:image,image,alt:'Picture to describe'}))};
 }
 
-export function pickPicture(pictures,seen,random=Math.random){const pool=pictures.filter(p=>!seen.has(p.id));return pool.length?pool[Math.floor(random()*pool.length)]:null;}
-export function bluffWinner(guessedLiar,actuallyLied){return guessedLiar===actuallyLied?1:0;}
-export function matchWinner(scores){return scores[0]===scores[1]?null:scores[0]>scores[1]?0:1;}
+export function pickPicture(pictures,seen,random=Math.random){
+ const pool=pictures.filter(p=>!seen.has(p.id));
+ return pool.length?pool[Math.floor(random()*pool.length)]:null;
+}
+
+// Returns score changes from the current describer's and guesser's perspectives.
+export function scoreBluffRound(actuallyLied,guessedLiar){
+ if(actuallyLied && !guessedLiar)return {describer:2,guesser:-1,correct:false};
+ if(actuallyLied && guessedLiar)return {describer:-1,guesser:1,correct:true};
+ if(!actuallyLied && !guessedLiar)return {describer:0,guesser:1,correct:true};
+ return {describer:1,guesser:-1,correct:false};
+}
+
+export function reachedTarget(scores,target=5){
+ return scores.findIndex(score=>score>=target);
+}
+
+export function matchWinner(scores){
+ return scores[0]===scores[1]?null:scores[0]>scores[1]?0:1;
+}
