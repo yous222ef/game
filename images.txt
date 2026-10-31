@@ -1,0 +1,21 @@
+# One image path per line. No labels or answer keys needed.
+images/demo-1.svg
+images/demo-2.svg
+images/demo-3.svg
+images/demo-4.svg
+images/demo-5.svg
+images/demo-6.svg
+images/demo-7.svg
+images/demo-8.svg
+images/demo-9.svg
+images/demo-10.svg
+images/demo-11.svg
+images/demo-12.svg
+images/demo-13.svg
+images/demo-14.svg
+images/demo-15.svg
+images/demo-16.svg
+images/demo-17.svg
+images/demo-18.svg
+images/demo-19.svg
+images/demo-20.svg

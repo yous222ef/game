@@ -1,73 +1,61 @@
 # Picture Duel
 
-A buildless, responsive two-player game. Plain HTML, CSS and JavaScript; no dependencies or accounts. Includes 20 simple SVG demo cards. Replace these with your real picture collection.
-
-## Publish on GitHub Pages
-
-1. Extract the ZIP and upload the contents of `picture-duel` to the root of your GitHub repository. Keep `index.html` at the root.
-2. Open repository **Settings → Pages**.
-3. Choose **Deploy from a branch**, your branch (usually `main`), and **/(root)**, then Save.
-4. Open the Pages URL GitHub provides after deployment.
-
-No build command is needed. All application paths are relative, so repository subpaths work.
-
-Official guide: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+Responsive, buildless two-player picture game for GitHub Pages. Includes 20 simple demo illustrations. No JSON deck, option labels, answer keys, dependencies or accounts are required.
 
 ## Play
 
-- Player 1 is the describer throughout the match. Player 2 is the guesser.
-- Reveal starts a 60-second countdown only after the image loads.
-- Finish early or let the timer expire. The image is removed for handoff.
-- Player 2 starts their own 90-second timer, then chooses one of two large buttons.
-- Correct: Player 2 gets one point. Wrong or timeout: Player 1 gets one point.
-- See the answer and picture after every round. Ten rounds decide the winner; 5–5 is a draw.
-- For equal opportunities, swap names/roles for your next match.
-- Fullscreen button uses the browser fullscreen API where supported. The layout also works in an ordinary mobile browser; unsupported browsers display guidance.
+1. Player 1 reveals a picture and has 60 seconds to describe it.
+2. The picture hides. Pass the phone to Player 2.
+3. Player 2 starts a 90-second timer and answers aloud.
+4. Tap **Answer given** before time runs out to stop the timer, then pass back to Player 1.
+5. Player 1 taps **judge answer**, sees the picture and selects **Correct** or **False**.
+6. Correct awards Player 2 one point. False awards Player 1 one point. A timeout automatically awards Player 1 a point.
+7. After ten rounds the higher score wins; 5–5 is a draw.
 
-## Your pictures and JSON
+Judging has no countdown: an answer submitted in time stays valid while passing the phone. Player 1 stays the describer/judge throughout a match. For the next match, swap roles by changing names in settings.
 
-Put JPG, PNG, WebP or SVG assets inside `images/`. Edit `deck.json`, or import a replacement deck through settings. Use at least 10 pictures with unique, stable IDs. A deck can contain thousands of entries: only the current image loads, rather than the whole collection.
+The large timer, last-ten-second beeps, finish chime, tap sounds, saved mute control, fullscreen message box and viewport-fit layout are retained. Browser/device audio restrictions may silence audio. Settings and message dialogs can scroll internally on small displays; the game page does not scroll.
 
-Schema example (abbreviated; add at least 10 entries):
+## Add pictures—no JSON
 
-```json
-{
-  "pictures": [
-    {
-      "id": "scene-0001",
-      "image": "images/scene-0001.webp",
-      "options": ["A penguin driving", "A penguin cooking"],
-      "alt": "Picture for the describer"
-    }
-  ],
-  "answers": {
-    "scene-0001": 0
-  }
-}
+Place your files in `images/`, then edit `images.txt`: one image path per line, at least 10 unique paths. Blank lines and lines beginning with `#` are ignored. For example:
+
+```text
+images/cat-at-the-office.webp
+images/flying-pizza.jpg
+images/strange-kitchen.png
 ```
 
-`0` means the left button; `1` means the right button. Each picture has its own two labels. Labels are plain text, up to 100 characters. IDs should remain the same when you rename an image, and be globally unique across decks. Relative image paths resolve from the website root folder, even when importing a JSON file from your computer. Importing JSON does not upload its images: host those in the repository or use HTTPS image URLs. Use assets you have permission to publish.
+Or automatically rebuild the list after adding/removing files:
 
-Custom imports are capped at 10 MB. Larger collections can be configured directly in `deck.json`. Avoid embedding image bytes. External image hosts must allow browser access. Broken images show retry/replace controls and are not marked as shown.
+```sh
+python3 update-images.py
+```
 
-## History and persistence
+The helper scans `images/`, including subfolders, for JPG, JPEG, PNG, WebP, GIF, SVG and AVIF. Upload both the images and the updated `images.txt` to GitHub. Delete demo images first if you do not want them included.
 
-Shown IDs, player names and imported decks are saved in `localStorage`. The game refuses to repeat pictures until you explicitly replay an exhausted deck or clear history in settings. History spans matches and refreshes within the same browser/origin; it does not sync between devices. Clearing browser data clears history. If storage is blocked/full, an on-screen notice explains the limitation. Current match scores/timers are deliberately not resumed after a reload; shown-picture history is retained.
+A runtime image list is needed so the static app knows which files to load. There is no answer metadata to maintain. You can also import a `.txt` list in settings (up to 10 MB); importing paths does not upload images. Relative paths resolve from the website folder. HTTPS image URLs are supported when their hosts permit loading. Only the current picture loads, so large lists do not preload all images.
 
-Only IDs/metadata are persisted, not cached image files. This is not an offline app. Answer keys are public in this client-side game; it is designed for friendly local play, not tamper-proof competitive use.
+## History
 
-## Local development
+Shown image paths persist across matches and refreshes in browser localStorage, alongside names, sound preferences and an imported text list. Original demo history migrates to image paths. Old JSON-based custom decks are no longer loaded; add those images to the text list instead.
 
-Serve the folder (opening `index.html` directly as a file does not support fetching JSON/modules):
+The game asks before replaying an exhausted deck. History is per browser/origin, does not sync between devices, and is lost if browser data is cleared. Renaming an image makes it a new entry. Current match scores/timers reset on reload. If storage fails, a message explains it. Images themselves are not saved for offline play.
+
+## GitHub Pages
+
+Upload the extracted folder's contents to your repository root, with `index.html` at the root. In **Settings → Pages**, choose **Deploy from a branch**, your branch (usually `main`), and **/(root)**. Save and use the Pages URL GitHub provides. No build step is needed. You can delete the old `deck.json` when upgrading; the app no longer requests it.
+
+Official guide: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+
+`package.json` is only optional test-runner configuration, not a game deck; it is not used by the website.
+
+## Local development and verification
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Open http://localhost:8000. With Node.js installed, run `npm test` for deck validation, image existence, history exhaustion, scoring and tie checks. No npm install required.
+Open http://localhost:8000. Do not open index.html directly as a file, because ES modules and fetching the image list require a server.
 
-## Verification
-
-- Automated tests: demo deck, local assets, invalid JSON structures, duplicate IDs, unsafe URL schemes, no-repeat selection, exhaustion, ten-round point totals and draws.
-- Browser check: start → reveal/timer → hidden handoff → answer buttons/timer → correct feedback/score.
-- CSS includes phone and landscape layouts; no physical phone/device compatibility test was performed.
+With Node.js installed, run `npm test` (no installation needed). Seven checks cover image-list parsing, local assets, invalid paths, repeat prevention, exhaustion, manual scoring/draws, sound synthesis/muting, and unsupported audio. Browser-checked: reveal → hidden handoff → timed spoken answer → stop timer → return to Player 1 → picture and Correct/False buttons → False awards Player 1. Previous viewport checks covered desktop and portrait/landscape phone-sized frames, not physical phones.
