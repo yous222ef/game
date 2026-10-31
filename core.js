@@ -5,6 +5,7 @@ export function parseImageList(text){
  for(const path of paths){const url=new URL(path,'https://example.org/');if(!['https:','http:'].includes(url.protocol))throw Error('Use relative image paths or HTTP(S) URLs.');}
  return {pictures:paths.map(image=>({id:image,image,alt:'Picture to describe'}))};
 }
+
 export function pickPicture(pictures,seen,random=Math.random){const pool=pictures.filter(p=>!seen.has(p.id));return pool.length?pool[Math.floor(random()*pool.length)]:null;}
-export function roundWinner(correct){return correct===true?1:0;}
+export function bluffWinner(guessedLiar,actuallyLied){return guessedLiar===actuallyLied?1:0;}
 export function matchWinner(scores){return scores[0]===scores[1]?null:scores[0]>scores[1]?0:1;}

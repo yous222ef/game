@@ -1,15 +1,21 @@
-# Generated image list; one path per line.
-images/865efabc-5adb-4a61-b289-8d7d18c931e1.png
-images/ChatGPT Image Oct 31, 2026, 07_51_20 PM-1.png
-images/ChatGPT Image Oct 31, 2026, 07_51_21 PM-2.png
-images/ChatGPT Image Oct 31, 2026, 07_51_22 PM-3.png
-images/ChatGPT Image Oct 31, 2026, 07_51_23 PM-4.png
-images/ChatGPT Image Oct 31, 2026, 07_51_24 PM-5.png
-images/ChatGPT Image Oct 31, 2026, 07_57_37 PM-1.png
-images/ChatGPT Image Oct 31, 2026, 07_57_37 PM-2.png
-images/ChatGPT Image Oct 31, 2026, 07_57_38 PM-3.png
-images/ChatGPT Image Oct 31, 2026, 08_03_56 PM-1.png
-images/ChatGPT Image Oct 31, 2026, 08_03_57 PM-2.png
-images/ChatGPT Image Oct 31, 2026, 08_03_58 PM-3.png
-images/ChatGPT Image Oct 31, 2026, 08_03_59 PM-4.png
-images/ChatGPT Image Oct 31, 2026, 08_04_01 PM-5.png
+# One image path per line. No labels or answer keys needed.
+images/demo-1.svg
+images/demo-2.svg
+images/demo-3.svg
+images/demo-4.svg
+images/demo-5.svg
+images/demo-6.svg
+images/demo-7.svg
+images/demo-8.svg
+images/demo-9.svg
+images/demo-10.svg
+images/demo-11.svg
+images/demo-12.svg
+images/demo-13.svg
+images/demo-14.svg
+images/demo-15.svg
+images/demo-16.svg
+images/demo-17.svg
+images/demo-18.svg
+images/demo-19.svg
+images/demo-20.svg

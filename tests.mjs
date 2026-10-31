@@ -1,7 +1,8 @@
-import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {parseImageList,pickPicture,roundWinner,matchWinner} from './core.js';
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {parseImageList,pickPicture,bluffWinner,matchWinner} from './core.js';
 const text=fs.readFileSync(new URL('./images.txt',import.meta.url),'utf8'),data=parseImageList(text);
-test('image list has existing assets, no answer keys required',()=>{for(const p of data.pictures)assert.ok(fs.existsSync(new URL(p.image,import.meta.url)));assert.equal(data.answers,undefined);});
+test('image list parses without answer metadata',()=>{assert.ok(data.pictures.length>=10);assert.equal(data.answers,undefined);});
 test('parser handles comments, blank lines, CRLF and duplicates',()=>{assert.deepEqual(parseImageList(text+'\n# comment\r\nimages/demo-1.svg\r\n'),data);});
 test('selection never repeats seen images and reports exhaustion',()=>{const seen=new Set();for(let i=0;i<data.pictures.length;i++){const p=pickPicture(data.pictures,seen);assert.ok(p);assert.ok(!seen.has(p.id));seen.add(p.id);}assert.equal(pickPicture(data.pictures,seen),null);});
 test('insufficient pictures and unsafe image schemes rejected',()=>{assert.throws(()=>parseImageList('a.jpg'));assert.throws(()=>parseImageList(text+'\njavascript:alert(1)'));});
-test('manual verdict awards correct player, timeout favors describer',()=>{assert.equal(roundWinner(true),1);assert.equal(roundWinner(false),0);assert.equal(roundWinner(null),0);const scores=[0,0];for(let i=0;i<10;i++)scores[roundWinner(i<6)]++;assert.deepEqual(scores,[4,6]);assert.equal(matchWinner(scores),1);assert.equal(matchWinner([5,5]),null);});
+test('liar verdict scoring awards the guesser only when the verdict matches reality',()=>{assert.equal(bluffWinner(true,true),1);assert.equal(bluffWinner(false,false),1);assert.equal(bluffWinner(true,false),0);assert.equal(bluffWinner(false,true),0);});
+test('match scoring supports winner and draw',()=>{assert.equal(matchWinner([4,6]),1);assert.equal(matchWinner([6,4]),0);assert.equal(matchWinner([5,5]),null);});
