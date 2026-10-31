@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {validateDeck,pickPicture,roundWinner,matchWinner} from './core.js';
+const data=JSON.parse(fs.readFileSync(new URL('./deck.json',import.meta.url)));
+test('demo deck has valid local images and indexed answers',()=>{const d=validateDeck(data);for(const p of d.pictures)assert.ok(fs.existsSync(new URL(p.image,import.meta.url)));});
+test('selection never repeats seen images and reports exhaustion',()=>{const seen=new Set();for(let i=0;i<data.pictures.length;i++){const p=pickPicture(data.pictures,seen);assert.ok(p);assert.ok(!seen.has(p.id));seen.add(p.id);}assert.equal(pickPicture(data.pictures,seen),null);});
+test('invalid and duplicate cards, unsafe image schemes and missing answers rejected',()=>{for(const mutate of [d=>d.pictures[1].id=d.pictures[0].id,d=>d.answers={},d=>d.pictures[0].image='javascript:alert(1)',d=>d.pictures[0].options=['one']]){const d=structuredClone(data);mutate(d);assert.throws(()=>validateDeck(d));}});
+test('ten rounds award exactly ten points; wrong and timeout favor describer',()=>{const scores=[0,0];for(let i=0;i<10;i++)scores[roundWinner(1,i<6?1:null)]++;assert.deepEqual(scores,[4,6]);assert.equal(matchWinner(scores),1);assert.equal(roundWinner(0,1),0);assert.equal(roundWinner(0,null),0);assert.equal(matchWinner([5,5]),null);});

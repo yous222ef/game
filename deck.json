@@ -1,0 +1,206 @@
+{
+  "pictures": [
+    {
+      "id": "demo-1",
+      "image": "images/demo-1.svg",
+      "options": [
+        "A moon",
+        "A sun"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-2",
+      "image": "images/demo-2.svg",
+      "options": [
+        "A tree",
+        "A flower"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-3",
+      "image": "images/demo-3.svg",
+      "options": [
+        "A house",
+        "A tent"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-4",
+      "image": "images/demo-4.svg",
+      "options": [
+        "A boat",
+        "A car"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-5",
+      "image": "images/demo-5.svg",
+      "options": [
+        "A star",
+        "A heart"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-6",
+      "image": "images/demo-6.svg",
+      "options": [
+        "A moon",
+        "A sun"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-7",
+      "image": "images/demo-7.svg",
+      "options": [
+        "A tree",
+        "A flower"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-8",
+      "image": "images/demo-8.svg",
+      "options": [
+        "A house",
+        "A tent"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-9",
+      "image": "images/demo-9.svg",
+      "options": [
+        "A boat",
+        "A car"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-10",
+      "image": "images/demo-10.svg",
+      "options": [
+        "A star",
+        "A heart"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-11",
+      "image": "images/demo-11.svg",
+      "options": [
+        "A moon",
+        "A sun"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-12",
+      "image": "images/demo-12.svg",
+      "options": [
+        "A tree",
+        "A flower"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-13",
+      "image": "images/demo-13.svg",
+      "options": [
+        "A house",
+        "A tent"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-14",
+      "image": "images/demo-14.svg",
+      "options": [
+        "A boat",
+        "A car"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-15",
+      "image": "images/demo-15.svg",
+      "options": [
+        "A star",
+        "A heart"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-16",
+      "image": "images/demo-16.svg",
+      "options": [
+        "A moon",
+        "A sun"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-17",
+      "image": "images/demo-17.svg",
+      "options": [
+        "A tree",
+        "A flower"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-18",
+      "image": "images/demo-18.svg",
+      "options": [
+        "A house",
+        "A tent"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-19",
+      "image": "images/demo-19.svg",
+      "options": [
+        "A boat",
+        "A car"
+      ],
+      "alt": "A simple illustration to describe"
+    },
+    {
+      "id": "demo-20",
+      "image": "images/demo-20.svg",
+      "options": [
+        "A star",
+        "A heart"
+      ],
+      "alt": "A simple illustration to describe"
+    }
+  ],
+  "answers": {
+    "demo-1": 0,
+    "demo-2": 0,
+    "demo-3": 0,
+    "demo-4": 0,
+    "demo-5": 0,
+    "demo-6": 1,
+    "demo-7": 1,
+    "demo-8": 1,
+    "demo-9": 1,
+    "demo-10": 1,
+    "demo-11": 0,
+    "demo-12": 0,
+    "demo-13": 0,
+    "demo-14": 0,
+    "demo-15": 0,
+    "demo-16": 1,
+    "demo-17": 1,
+    "demo-18": 1,
+    "demo-19": 1,
+    "demo-20": 1
+  }
+}
