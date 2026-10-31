@@ -4,15 +4,16 @@ Responsive, buildless two-player picture game for GitHub Pages. Includes 20 simp
 
 ## Play
 
-1. Player 1 reveals a picture and has 60 seconds to describe it.
-2. The picture hides. Pass the phone to Player 2.
-3. Player 2 starts a 90-second timer and answers aloud.
-4. Tap **Answer given** before time runs out to stop the timer, then pass back to Player 1.
-5. Player 1 taps **judge answer**, sees the picture and selects **Correct** or **False**.
-6. Correct awards Player 2 one point. False awards Player 1 one point. A timeout automatically awards Player 1 a point.
-7. After ten rounds the higher score wins; 5–5 is a draw.
+1. Player 1 starts Round 1, reveals a picture and has 60 seconds to describe it.
+2. The picture hides, but Player 1 keeps the phone.
+3. Player 1 starts the 90-second answer timer. Player 2 answers aloud without touching the phone.
+4. Player 1 watches the timer and tells Player 2 when time is up. If Player 2 answers before time runs out, Player 1 taps **Answer given · judge**.
+5. Player 1 sees the picture again and selects **Correct** or **False**.
+6. Correct awards the current guesser one point. False or timeout awards the current describer one point.
+7. Only after the round ends is the phone handed over. Player 2 starts Round 2 as the new describer, and the roles keep alternating each round.
+8. After ten rounds the higher score wins; 5–5 is a draw.
 
-Judging has no countdown: an answer submitted in time stays valid while passing the phone. Player 1 stays the describer/judge throughout a match. For the next match, swap roles by changing names in settings.
+The phone stays with the describer/judge for the entire round. The guesser never needs to touch it. Roles automatically alternate: Player 1 describes odd-numbered rounds and Player 2 describes even-numbered rounds.
 
 The large timer, last-ten-second beeps, finish chime, tap sounds, saved mute control, fullscreen message box and viewport-fit layout are retained. Browser/device audio restrictions may silence audio. Settings and message dialogs can scroll internally on small displays; the game page does not scroll.
 
@@ -58,4 +59,4 @@ python3 -m http.server 8000
 
 Open http://localhost:8000. Do not open index.html directly as a file, because ES modules and fetching the image list require a server.
 
-With Node.js installed, run `npm test` (no installation needed). Seven checks cover image-list parsing, local assets, invalid paths, repeat prevention, exhaustion, manual scoring/draws, sound synthesis/muting, and unsupported audio. Browser-checked: reveal → hidden handoff → timed spoken answer → stop timer → return to Player 1 → picture and Correct/False buttons → False awards Player 1. Previous viewport checks covered desktop and portrait/landscape phone-sized frames, not physical phones.
+With Node.js installed, run `npm test` (no installation needed). Seven checks cover image-list parsing, local assets, invalid paths, repeat prevention, exhaustion, manual scoring/draws, sound synthesis/muting, and unsupported audio. Browser flow: reveal → hide picture while keeping the phone → describer starts the 90-second spoken-answer timer → describer judges Correct/False → phone changes hands only for the next round. Roles alternate automatically each round. Previous viewport checks covered desktop and portrait/landscape phone-sized frames, not physical phones.
